@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <memory>
 #include "tinyxml/tinyxml.h"
+#include "../func/FuncFile.h"
 #include "../base/Log.h"
 #include "LoadXmlBase.h"
 
@@ -12,15 +13,15 @@ bool LoadXmlBase::loadXmlData(const char * fileName)
 
 	setFileName(fileName);
 	
-	std::string strName = fileName; //TODO
+	std::string strName = get_local_path(fileName);
 	std::unique_ptr<TiXmlDocument> pDoc(new TiXmlDocument(strName.c_str()));
 	if (!pDoc) {
-		// LOG_ERROR("TiXmlDocument %s fail!", strName);
+		// LOG_ERROR("TiXmlDocument %s fail!", strName.c_str());
 		return false;
 	}
 
 	if (!pDoc->LoadFile()) {
-		// LOG_ERROR("Load %s fail!", strName);
+		// LOG_ERROR("Load %s fail!", strName.c_str());
 		return false;
 	}
 

@@ -1,4 +1,4 @@
-#include "func_str.h"
+#include "FuncStr.h"
 
 //去除字符串首位特殊字符
 extern std::string trim_str(const std::string & str)

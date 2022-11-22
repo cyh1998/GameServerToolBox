@@ -3,6 +3,6 @@
 
 #include <string>
 
-extern std::string trim_str(const std::string & str);
+std::string trim_str(const std::string & str);
 
 #endif //FUNC_STR_H
