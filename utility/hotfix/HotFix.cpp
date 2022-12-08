@@ -1,12 +1,15 @@
 #include <unistd.h> //getpagesize()
 #include <stdint.h> //uint64
-#include <sys/mman.h> //mprotect()
 #include <string.h> //memcpy()
-#include <dlfcn.h> //dl相关api
 #include "HotFix.h"
+#ifndef WIN32
+#include <dlfcn.h> //dl相关api
+#include <sys/mman.h> //mprotect()
+#endif
 
 int fix_func(const void* new_func, void* old_func)
 {
+#ifndef WIN32
 	//跳转指令
     char prefix[] = {'\x48', '\xb8'};   //MOV new_func %rax
     char postfix[] = {'\xff', '\xe0'};  //JMP %rax
@@ -31,11 +34,13 @@ int fix_func(const void* new_func, void* old_func)
     if (0 != mprotect(align_point, len, PROT_READ | PROT_EXEC)) {
         return -1;
     }
+#endif
     return 0;
 }
 
 int do_fix(const char* patch)
 {
+#ifndef WIN32
 	// 调用dlopen加载so库
     void *lib = dlopen(patch, RTLD_NOW);
     if (nullptr == lib) {
@@ -57,5 +62,7 @@ int do_fix(const char* patch)
 
     // 执行更新
     return fix_func(fix_item->new_func, fix_item->old_func);
+#endif
+    return 0;
 }
 
