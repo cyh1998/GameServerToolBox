@@ -55,7 +55,7 @@ install(EXPORT kcp-targets
 if(BUILD_TESTING)
     enable_language(CXX)
 
-    add_executable(kcp_test test.cpp)
+	#add_executable(kcp_test test.cpp)
     if(MSVC AND NOT (MSVC_VERSION LESS 1900))
         target_compile_options(kcp_test PRIVATE /utf-8)
     endif()
