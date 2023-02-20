@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <execinfo.h> //backtrace()
 #include <cxxabi.h> //abi::__cxa_demangle()
+#include "../func/FuncStr.h"
 #include "CallStack.h"
 
 #define BUFFERSIZE 2048
@@ -43,14 +44,14 @@ void CallStack::GetStack(char *buffer, size_t size)
             int status = 0;
             char *funcName = abi::__cxa_demangle(name, 0, 0, &status);
             if (status == 0) {
-                ret = snprintf(buffer + index, size - index, "[bt]:(%u) %s : %s+%s%s\n", i, stackInfo[i], funcName, indexBegin, indexEnd);
+                ret = sprintf_s(buffer + index, size - index, "[bt]:(%u) %s : %s+%s%s\n", i, stackInfo[i], funcName, indexBegin, indexEnd);
             } else {
-                ret = snprintf(buffer + index, size - index, "[bt]:(%u) %s : %s+%s%s\n", i, stackInfo[i], name, indexBegin, indexEnd);
+                ret = sprintf_s(buffer + index, size - index, "[bt]:(%u) %s : %s+%s%s\n", i, stackInfo[i], name, indexBegin, indexEnd);
             }
 
             free(funcName);
         } else {
-            ret = snprintf(buffer + index, size - index, "[bt]:(%u) %s\n", i, stackInfo[i]);
+            ret = sprintf_s(buffer + index, size - index, "[bt]:(%u) %s\n", i, stackInfo[i]);
         }
 
         if (ret > 0) {
