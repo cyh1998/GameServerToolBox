@@ -4,10 +4,13 @@
 #include <string>
 #include <vector>
 
+#define sprintf_s sprintf_safe
+
 extern std::string TrimStr(const std::string & str);
 
 extern int SplitStr(const std::string & str, char separator, std::vector<std::string> & result, bool ignoreEmpty = false);
 
+// 根据分隔符分割字符串为整数类型
 template<typename T>
 inline int SplitStrToNum(const std::string & str, char separator, std::vector<T> & result)
 {
@@ -23,6 +26,15 @@ inline int SplitStrToNum(const std::string & str, char separator, std::vector<T>
     }
 
     return result.size();
+}
+
+// 安全格式化字符串函数
+template<typename... Args>
+inline int sprintf_safe(char * dst, size_t size, const char * format, Args&&... args)
+{
+    int len = snprintf(dst, size, format, std::forward<Args>(args)...);
+    dst[size - 1] = 0;
+    return len > (int)size ? (int)size : len;
 }
 
 #endif //FUNC_STR_H
