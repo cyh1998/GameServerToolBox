@@ -21,7 +21,7 @@ inline int SplitStrToNum(const std::string & str, char separator, std::vector<T>
     SplitStr(str, separator, strVec);
     T value = 0;
     for (const auto & iter : strVec) {
-        value = (T)stoll(iter);
+        value = static_cast<T>(stoll(iter));
         result.emplace_back(value);
     }
 
@@ -34,7 +34,7 @@ inline int sprintf_safe(char * dst, size_t size, const char * format, Args&&... 
 {
     int len = snprintf(dst, size, format, std::forward<Args>(args)...);
     dst[size - 1] = 0;
-    return len > (int)size ? (int)size : len;
+    return len > static_cast<int>(size) ? static_cast<int>(size) : len;
 }
 
 #endif //FUNC_STR_H

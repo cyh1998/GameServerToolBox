@@ -58,7 +58,7 @@ void CallStack::GetStack(char *buffer, size_t size)
             index += ret;
         }
 
-        if (index + 0x128 > (int)size) {
+        if (index + 0x128 > static_cast<int>(size)) {
             break;
         }
     }

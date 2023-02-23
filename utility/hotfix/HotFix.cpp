@@ -16,10 +16,10 @@ int fix_func(const void* new_func, void* old_func)
 
 	//开启代码可写权限
     size_t page_size= getpagesize(); //获取系统内存分页大小
-    char * align_point = (char *)old_func - ((uint64_t)(char *)old_func % page_size); //函数所在分页的起始地址
-    
+    char * align_point = static_cast<char *>(old_func) - (reinterpret_cast<uint64_t>(static_cast<char *>(old_func)) % page_size); //函数所在分页的起始地址
+
 	const int inst_len = sizeof(prefix) + sizeof(void *) + sizeof(postfix); //写入指令的长度
-	size_t len = (char *)old_func - align_point + inst_len; //新增跳转指令后函数的内存长度
+	size_t len = static_cast<char *>(old_func) - align_point + inst_len; //新增跳转指令后函数的内存长度
 
 	if (0 != mprotect(align_point, len, PROT_READ | PROT_WRITE | PROT_EXEC)) {
         return -1;
@@ -27,8 +27,8 @@ int fix_func(const void* new_func, void* old_func)
 	
 	//将跳转指令写入原函数开头
     memcpy(old_func, prefix, sizeof(prefix));
-    memcpy((char *)old_func + sizeof(prefix), &new_func, sizeof(void *));
-    memcpy((char *)old_func + sizeof(prefix) + sizeof(void *), postfix, sizeof(postfix));
+    memcpy(static_cast<char *>(old_func) + sizeof(prefix), &new_func, sizeof(void *));
+    memcpy(static_cast<char *>(old_func) + sizeof(prefix) + sizeof(void *), postfix, sizeof(postfix));
 
 	//关闭代码可写权限
     if (0 != mprotect(align_point, len, PROT_READ | PROT_EXEC)) {
