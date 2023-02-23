@@ -62,7 +62,7 @@ std::string GainMsecTimeStr()
     tm tmSturct{};
     localtime_r(&timer, &tmSturct);
     char cStr[21] = {0};
-    strftime(cStr, 21, "%Y-%m-%d %H:&M:%S:", &tmSturct);
+    strftime(cStr, 21, "%Y-%m-%d %H:&M:%S.", &tmSturct);
 
     std::string timeStr = cStr;
     timeStr += std::to_string(tsSturct.tv_nsec / 1000000);
