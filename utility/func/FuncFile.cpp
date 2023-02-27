@@ -2,7 +2,6 @@
 #include <string.h>
 #include "FuncFile.h"
 
-// 获取执行文件的绝对路径(包含执行文件名)
 std::string get_full_name()
 {
 	static std::string strResult;
@@ -19,7 +18,6 @@ std::string get_full_name()
 	return strResult;
 }
 
-// 获取执行文件的绝对路径
 std::string get_exec_path() 
 {
 	static std::string strResult;
@@ -38,7 +36,6 @@ std::string get_exec_path()
 	return strResult;
 }
 
-// 获取相对路径文件的绝对路径
 std::string get_local_path(const char * filePath)
 {
 	std::string ret = get_exec_path();

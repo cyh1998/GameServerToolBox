@@ -6,8 +6,14 @@
 
 #define sprintf_s sprintf_safe
 
+// 去除字符串首位特殊字符
 extern std::string TrimStr(const std::string & str);
 
+// 根据分隔符分割字符串，返回分割的字符串个数
+// str 源字符串
+// separator 分隔符
+// result 分割结果
+// ignoreEmpty 是否忽略空值
 extern int SplitStr(const std::string & str, char separator, std::vector<std::string> & result, bool ignoreEmpty = false);
 
 // 根据分隔符分割字符串为整数类型
