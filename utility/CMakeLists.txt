@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 
 project(utility)
 
-include_directories(../3rdsrc)
+include_directories(../third_party)
 include_directories(/usr/include/mysql)
 
 aux_source_directory(./base BASE_SRCS)
