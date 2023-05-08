@@ -334,7 +334,7 @@ configure_file (
   )
 
 if (NOT BEHAVIAC_ANDROID_STUDIO)
-    set(LIB_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+    set(LIB_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/../../lib)
 endif()
 set(BINARY_PATH ${PROJECT_SOURCE_DIR}/bin)
 

@@ -7,6 +7,8 @@ include(GNUInstallDirs)
 
 cmake_policy(SET CMP0054 NEW)
 
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/../../lib)
+
 if(BUILD_SHARED_LIBS AND WIN32)
     set(exports_def_file "${CMAKE_CURRENT_BINARY_DIR}/exports.def")
     set(exports_def_contents
