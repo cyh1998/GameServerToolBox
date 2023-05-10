@@ -5,6 +5,7 @@ project(toolbox)
 find_package(Threads REQUIRED)
 
 set(LIB_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+set(BINARY_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 add_subdirectory ("${PROJECT_SOURCE_DIR}/utility")
 add_subdirectory ("${PROJECT_SOURCE_DIR}/third_party/behaviac")

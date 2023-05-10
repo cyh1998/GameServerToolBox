@@ -27,6 +27,7 @@ AIAgent::~AIAgent()
 void AIAgent::SayHello()
 {
 ///<<< BEGIN WRITING YOUR CODE SayHello
+    printf("\nHello Behaviac!\n\n");
 ///<<< END WRITING YOUR CODE
 }
 
